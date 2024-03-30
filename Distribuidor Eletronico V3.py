@@ -83,15 +83,29 @@ def getAtmNumber():
 
 
 def distribute(nElec: int):
-
     global orb
 
     while nElec > 0:
-        index = None
-
         for i in elecOrder:
             if orb[i] < maxElec[i]:
                 electrons = maxElec[i] - orb[i]
                 orb[i] += electrons
                 nElec -= electrons
                 break
+
+# DOES NOT WORK YET [WORK IN PROGRESS]
+
+def operateCation(nIon: int): #Remove eletrons das camadas
+    global orb
+
+    while nIon > 0:
+        for i in elecOrder[::-1]:
+            if orb[i] > 0:
+                pass
+                
+
+# [2,2,3]
+
+distribute(10)
+operateCation(3)
+print(orb)
