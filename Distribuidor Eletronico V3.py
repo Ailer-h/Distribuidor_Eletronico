@@ -4,6 +4,7 @@ from time import sleep
 
 orb = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 elecOrder = [0,1,2,3,4,6,5,7,10,8,11,14,9,12,15,17,13,16,18]
+camadas = [1,3,6,10,14,17]
 
 #Numero maximo de eletrons seguindo a ordem de cima;
 maxElec = [2,2,6,2,6,2,10,6,2,10,6,2,14,10,6,2,14,10,6]
@@ -93,7 +94,6 @@ def distribute(nElec: int):
                 nElec -= electrons
                 break
 
-# DOES NOT WORK YET [WORK IN PROGRESS]
 
 def operateCation(nIon: int): #Remove eletrons das camadas
     global orb
@@ -101,10 +101,20 @@ def operateCation(nIon: int): #Remove eletrons das camadas
     while nIon > 0:
         for i in elecOrder[::-1]:
             if orb[i] > 0:
+                remove = abs(orb[i] - nIon)
+                nIon -= remove
+                orb[i] -= remove
+                break
+    
+def operateAnion(nIon: int): #Adiciona eletrons nas camadas
+    while nIon > 0:
+        for i in camadas:
+            if orb[i] == 0:
                 pass
                 
 
-# [2,2,3]
+# Slices work like that [start:end:jump]
+# Where the start is inclusive and the end is exclusive
 
 distribute(10)
 operateCation(3)
